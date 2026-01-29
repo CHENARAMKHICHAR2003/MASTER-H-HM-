@@ -91,6 +91,17 @@ bot = Client(
     bot_token=BOT_TOKEN
 )
 
+# ================= Koyeb Health Check Server =================
+
+async def health_check(request):
+    return web.Response(text="OK")
+
+def run_web():
+    app = web.Application()
+    app.router.add_get("/", health_check)
+    web.run_app(app, host="0.0.0.0", port=8000)
+
+threading.Thread(target=run_web, daemon=True).start()
 #================================================================================================================================
 @bot.on_message(filters.command("addauth") & filters.private)
 async def add_auth_user(client: Client, message: Message):
