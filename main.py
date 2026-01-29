@@ -10,6 +10,7 @@ import subprocess
 import urllib
 import urllib.parse
 import yt_dlp
+import threading
 import tgcrypto
 import cloudscraper
 from Crypto.Cipher import AES
