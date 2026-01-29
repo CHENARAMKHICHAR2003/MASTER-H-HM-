@@ -38,8 +38,8 @@ cookies_file_path= "youtube_cookies.txt"
 INSTAGRAM_COOKIES_PATH = os.getenv("INSTAGRAM_COOKIES_PATH", "instagram_cookies.txt")
 
 #==================================================================================================================================
-OWNER = int(os.environ.get("OWNER", 5680454765))
-AUTH_USER = os.environ.get('AUTH_USERS', '5680454765').split(',')
+OWNER = int(os.environ.get("OWNER", 8183010692))
+AUTH_USER = os.environ.get('AUTH_USERS', '8183010692').split(',')
 AUTH_USERS = [int(user_id) for user_id in AUTH_USER]
 
 #==================================================================================================================================
