@@ -33,7 +33,9 @@ from pyrogram.errors import FloodWait
 from pyrogram.errors.exceptions.bad_request_400 import StickerEmojiInvalid
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
+from aiohttp import web
+from pyrogram import idle
+import asyncio
 #========================================================================================================================================================================
 cookies_file_path= "youtube_cookies.txt"
 INSTAGRAM_COOKIES_PATH = os.getenv("INSTAGRAM_COOKIES_PATH", "instagram_cookies.txt")
@@ -1220,7 +1222,7 @@ async def main():
     await start_health_server()
     await bot.start()
     print("🤖 Bot + Health server started")
-    await asyncio.Event().wait()
-
+    await idle()
+    
 if __name__ == "__main__":
     asyncio.run(main())
