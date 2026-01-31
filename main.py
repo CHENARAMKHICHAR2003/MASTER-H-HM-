@@ -94,15 +94,13 @@ bot = Client(
 
 # ================= Koyeb Health Check Server =================
 
-async def health_check(request):
-    return web.Response(text="OK")
-
-def run_web():
+async def start_health_server():
     app = web.Application()
-    app.router.add_get("/", health_check)
-    web.run_app(app, host="0.0.0.0", port=8000)
-
-threading.Thread(target=run_web, daemon=True).start()
+    app.router.add_get("/", lambda r: web.Response(text="OK"))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", 8000)
+    await site.start()
 #================================================================================================================================
 @bot.on_message(filters.command("addauth") & filters.private)
 async def add_auth_user(client: Client, message: Message):
@@ -1218,6 +1216,11 @@ async def txt_handler(bot: Client, m: Message):
     os.remove(html_file_path)
 
 #================================================================================================================================
-bot.run()
+async def main():
+    await start_health_server()
+    await bot.start()
+    print("🤖 Bot + Health server started")
+    await asyncio.Event().wait()
+
 if __name__ == "__main__":
     asyncio.run(main())
